@@ -1,5 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios'
+
+const api = process.env.REACT_APP_API_URL
 
 class Register extends React.Component {
   constructor(){
@@ -20,7 +23,14 @@ class Register extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    console.log(this.state)
+    axios
+      .post(`${api}/user`, this.state)
+      .then(result => {
+        console.log(result)
+      })
+      .catch(error => {
+        console.log(error);
+      })
   }
 
   render() {
